@@ -89,9 +89,23 @@ h3:before {
     transform: scale(0);
 }
 
+// states
 h2.in-view:before,
 h3.in-view:before {
     transform: scale(1);
+}
+
+div.image  {
+    overflow: hidden;
+}
+
+div.image img {
+    transition: transform 1s 0.25s var(--timing);
+    transform: translate(0, 120%);
+}
+
+div.image.in-view img {
+    transform: translate(0, 0);
 }
 
 div.main .sticky {

@@ -8,10 +8,11 @@ import barbaPrefetch from '@barba/prefetch';
 import barbaCss from '@barba/css';
 import imagesLoaded from 'imagesloaded';
 
-// Selector all headers in pages
+// Listen all elements to set observer 
 const headers = document.querySelectorAll('h2, h3');
+const imageHolders = document.querySelectorAll('.image');
 
-// Connect headers to the observer
+// Connect elements to the observer
 // Has two agruments:
 // - callback => check every single time this changes over a certain treshold
 // - options => Options that is passed into IO() constructor to control the circumstances under which the observer's callback is invoked
@@ -31,6 +32,10 @@ const observer = new IntersectionObserver((entries) => {
 // observer has to make an callback on each each element
 headers.forEach((header) => {
   observer.observe(header)
+})
+
+imageHolders.forEach((holder) => {
+  observer.observe(holder)
 })
 
 // barba.use(barbaPrefetch);
