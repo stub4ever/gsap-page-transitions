@@ -1,0 +1,13 @@
+<footer>
+    <p>
+        <img src="img/footer-logo.svg" alt="Canvas Magazine logo">
+    </p>
+    <p>
+        Canvas Magazine is written by a remote team based in London, New York and Tokyo. We're international, just like our readers!
+    </p>
+    <p class="socials">
+        <a href="mailto:hi@superhi.com?subject=Hi from Canvas Mag">info@canvasmagazine.co</a>
+        <a href="https://twitter.com/superhi_">@canvas on Twitter</a>
+        <a href="https://instagram.com/superhi_">@canvas on Instagram</a>
+    </p>
+</footer>
