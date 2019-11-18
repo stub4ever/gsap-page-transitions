@@ -1,7 +1,7 @@
 {% extends 'layouts/layout.nunjucks' %}
 {% block content %}
 <!-- https://barba.js.org/docs/v2/user/core.html -->
-<main>
+<main data-barba="container" data-barba-namespace="home">
 	<section class="blog-index">
 		<div class="main">
 			<a href="story.html" class="sticky">

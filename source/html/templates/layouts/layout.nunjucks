@@ -44,7 +44,7 @@
 		crossorigin="anonymous" async></script>
 	</head>  
 
-	<body{% if bodyClass %} class="loading {{ bodyClass }}"{% endif %}>
+	<body data-barba="wrapper">
 		{% include 'partials/header.nunjucks' %} 
 	    {% block content %}
 		{% endblock %}

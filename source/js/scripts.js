@@ -39,9 +39,14 @@ imageHolders.forEach((holder) => {
 })
 
 // barba.use(barbaPrefetch);
-// barba.use(barbaCss);
-// barba.init({
-//   views: [],
-//   transitions: [],
-// });
+barba.use(barbaCss);
+barba.init({
+  transitions: [
+    {
+      name: 'switch',
+    }
+  ],
+  views: [],
+  debug: true, // displayed debug mode on console log
+});
 
