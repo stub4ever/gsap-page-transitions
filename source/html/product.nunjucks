@@ -1,27 +1,12 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>Multi functional tool – Canvas Magazine</title>
-
-    <link href="_base.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
-  </head>
-  <body class="product">
-
-    <header>
-      <a href="/">
-        <img src="logo.svg" alt="Canvas Logo">
-      </a>
-    </header>
-
+{% extends 'layouts/layout.nunjucks' %}
+{% block content %}
+<!-- https://barba.js.org/docs/v2/user/core.html -->
+<main>
     <section class="product-index">
       <div class="main">
         <div class="sticky">
           <div class="image">
-            <img src="product-2.jpg">
+            <img src="img/product-2.jpg">
           </div>
         </div>
       </div>
@@ -39,19 +24,5 @@
       </div>
     </section> 
 
-    <footer>
-      <p>
-        <img src="footer-logo.svg" alt="Canvas Magazine logo">
-      </p>
-      <p>
-        Canvas Magazine is written by a remote team based in London, New York and Tokyo. We're international, just like our readers!
-      </p>
-      <p class="socials">
-        <a href="mailto:hi@superhi.com?subject=Hi from Canvas Mag">info@canvasmagazine.co</a>
-        <a href="https://twitter.com/superhi_">@canvas on Twitter</a>
-        <a href="https://instagram.com/superhi_">@canvas on Instagram</a>
-      </p>
-    </footer>
-
-  </body>
-</html>
+</main>
+{% endblock %}     
