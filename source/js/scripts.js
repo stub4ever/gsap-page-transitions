@@ -55,6 +55,13 @@ barba.init({
       enter({current, next, trigger}) {
         // Run re-init the scripts when enter a page
         runScripts()
+        return new Promise((resolve) => {
+          // Set how long it will takes to run the page load
+          // setTimeout(resolve, 4000) // Set time out when to resolve this
+
+          // else using instant
+          resolve()
+        })
       },
       leave({current, next, trigger}) {
         
