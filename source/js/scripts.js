@@ -7,13 +7,12 @@ import barba from '@barba/core';
 import barbaPrefetch from '@barba/prefetch';
 import barbaCss from '@barba/css';
 import imagesLoaded from 'imagesloaded';
-
+import { gsap } from "gsap";
 
 const runScripts = () => {
   // Listen all elements to set observer 
   const headers = document.querySelectorAll('h2, h3');
   const imageHolders = document.querySelectorAll('.image');
-  console.log('hi')
   
   // Connect elements to the observer
   // Has two agruments:
@@ -46,25 +45,42 @@ const runScripts = () => {
 runScripts(); 
 
 barba.init({
+  debug: true,
   transitions: [
     {
       name: 'switch',
       // - Current is the current page that do something
       // - Next is the next page that do something
       // - Trigger is when we clicked on, that makes transition happend
-      enter({current, next, trigger}) {
-        // Run re-init the scripts when enter a page
-        runScripts()
-        return new Promise((resolve) => {
-          // Set how long it will takes to run the page load
-          // setTimeout(resolve, 4000) // Set time out when to resolve this
 
-          // else using instant
-          resolve()
+      // when enter a new page run this method for page transition
+      enter({current, next, trigger}) {
+        return new Promise((resolve) => {
+          const timeline = gsap.timeline({
+            onComplete() {
+              runScripts() // Run re-init the scripts when timeline is finished before it is resolved
+              resolve()
+            }
+          })
+
+          // Return header when enter
+          timeline.to("header", { y: "0" })
         })
       },
+
+      // when leave the page run this method for page transition
       leave({current, next, trigger}) {
-        
+        return new Promise((resolve) => {
+          const timeline = gsap.timeline({
+            onComplete() { 
+              // Solve instant when is completed
+              resolve() // when the task is finished => call resolve to tell that promise is completed
+            }
+          }) 
+
+          // Hide header when leave
+          timeline.to("header", { y: "-100%" })
+        })
       },
     }
   ],
