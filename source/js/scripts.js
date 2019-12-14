@@ -57,16 +57,20 @@ barba.init({
       
       // Once enter directly current page run this method for page transition
       once({current, next, trigger}) {
+        
+        const images = document.querySelectorAll('img') // collect all images
+        
+        gsap.set(next.container, {opacity: 0 }) // Set here the timeline that doesn't conflict with imagesloaded
+        
         return new Promise((resolve) => {
-          const timeline = gsap.timeline({
-            onComplete() {
-              resolve()
-            }
+          imagesLoaded(images, () => { // wait untill all images is loaded then start timeline
+            const timeline = gsap.timeline({
+              onComplete() { resolve() }
+            })
+            
+            timeline 
+              .to(next.container, {opacity: 1, delay:1 }) // set delay opacity 1 for smooth transition
           })
-          
-          timeline 
-            .set(next.container, {opacity: 0 })
-            .to(next.container, {opacity: 1, delay:1 }) // set delay opacity 1 for smooth transition
         })
       },
       
@@ -88,7 +92,7 @@ barba.init({
             .to("header", { y: "-100%" }, 0) // set starttime 0 to make this two timeline start at the same
             .to("footer", { y: "100%" }, 0)
             .to(current.container, { opacity: 0 }) // Fade current container after header + footer
-        })
+          })
       },
       
       // when enter a new page run this method for page transition
@@ -99,20 +103,26 @@ barba.init({
           behavior: 'smooth'
         })
         
+        
+        const images = document.querySelectorAll('img') // collect all images
+        
+        gsap.set(next.container, {opacity: 0 }) // Set here the timeline that doesn't conflict with imagesloaded
+        
         return new Promise((resolve) => {
-          const timeline = gsap.timeline({
-            onComplete() {
-              runScripts() // Run re-init the scripts when timeline is finished before it is resolved
-              resolve()
-            }
+          imagesLoaded(images, () => { // wait untill all images is loaded then start timeline
+            const timeline = gsap.timeline({
+              onComplete() { 
+                runScripts() // Run re-init the scripts when timeline is finished before it is resolved
+                resolve() 
+              }
+            })
+            
+            // Show new elements when enter
+            timeline
+              .to("header", { y: "0" }, 0)
+              .to("footer", { y: "0" }, 0)
+              .to(next.container, { opacity: 1, delay: 1 }) // Show entered container after header + footer
           })
-          
-          // Show new elements when enter
-          timeline
-            .set(next.container, { opacity: 0 }) // Set entered container to 0
-            .to("header", { y: "0" }, 0)
-            .to("footer", { y: "0" }, 0)
-            .to(next.container, { opacity: 1, delay: 1 }) // Show entered container after header + footer
         })
       },
     }
