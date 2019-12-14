@@ -2,7 +2,7 @@
 {% block content %}
 <!-- https://barba.js.org/docs/v2/user/core.html -->
 <main data-barba="wrapper">
-	<div data-barba="container">
+	<div data-barba="container" data-barba-namespace="product">
 
     <section class="product-index">
       <div class="main">

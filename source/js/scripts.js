@@ -9,6 +9,9 @@ import barbaCss from '@barba/css';
 import imagesLoaded from 'imagesloaded';
 import { gsap } from "gsap";
 
+
+
+const bodyTag = document.getElementsByTagName('body')[0];
 const runScripts = () => {
   // Listen all elements to set observer 
   const headers = document.querySelectorAll('h2, h3');
@@ -45,7 +48,6 @@ const runScripts = () => {
 runScripts(); 
 
 barba.init({
-  debug: true,
   transitions: [
     {
       name: 'switch',
@@ -115,6 +117,17 @@ barba.init({
       },
     }
   ],
-  views: [],
+  views: [
+    {
+      namespace: "product",
+      // Before entering when a page if the page contains has a barbaer-container with a name-space "product" add class product on the bodyTag
+      beforeEnter() {
+        bodyTag.classList.add('product')
+      },
+      beforeLeave() {
+        bodyTag.classList.remove('product')
+      },
+    }
+  ],
   debug: true, // displayed debug mode on console log
 });
