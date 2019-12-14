@@ -52,9 +52,37 @@ barba.init({
       // - Current is the current page that do something
       // - Next is the next page that do something
       // - Trigger is when we clicked on, that makes transition happend
-
+      
+      
+      // when leave the page run this method for page transition
+      leave({current, next, trigger}) {
+        return new Promise((resolve) => {
+          const timeline = gsap.timeline({
+            onComplete() { 
+              // When the timeline of container is fade out is still hidden on the next page to solve this
+              current.container.remove() // remove container when is fade out
+              
+              // Solve instant when is completed
+              resolve() // when the task is finished => call resolve to tell that promise is completed
+            }
+          }) 
+          
+          // Hide elements when leave
+          timeline
+            .to("header", { y: "-100%" }, 0) // set starttime 0 to make this two timeline start at the same
+            .to("footer", { y: "100%" }, 0)
+            .to(current.container, { opacity: 0 }) // Fade current container after header + footer
+        })
+      },
+      
       // when enter a new page run this method for page transition
       enter({current, next, trigger}) {
+        // When enter to a new page scroll to top 
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        })
+        
         return new Promise((resolve) => {
           const timeline = gsap.timeline({
             onComplete() {
@@ -62,24 +90,13 @@ barba.init({
               resolve()
             }
           })
-
-          // Return header when enter
-          timeline.to("header", { y: "0" })
-        })
-      },
-
-      // when leave the page run this method for page transition
-      leave({current, next, trigger}) {
-        return new Promise((resolve) => {
-          const timeline = gsap.timeline({
-            onComplete() { 
-              // Solve instant when is completed
-              resolve() // when the task is finished => call resolve to tell that promise is completed
-            }
-          }) 
-
-          // Hide header when leave
-          timeline.to("header", { y: "-100%" })
+          
+          // Show new elements when enter
+          timeline
+            .set(next.container, { opacity: 0 }) // Set entered container to 0
+            .to("header", { y: "0" }, 0)
+            .to("footer", { y: "0" }, 0)
+            .to(next.container, { opacity: 1 }) // Show entered container after header + footer
         })
       },
     }

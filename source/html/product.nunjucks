@@ -1,7 +1,9 @@
 {% extends 'layouts/layout.nunjucks' %}
 {% block content %}
 <!-- https://barba.js.org/docs/v2/user/core.html -->
-<main data-barba="container">
+<main data-barba="wrapper">
+	<div data-barba="container">
+
     <section class="product-index">
       <div class="main">
         <div class="sticky">
@@ -23,6 +25,6 @@
         </p>
       </div>
     </section> 
-
+  </div>
 </main>
 {% endblock %}     

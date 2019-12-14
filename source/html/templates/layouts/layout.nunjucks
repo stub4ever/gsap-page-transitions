@@ -44,7 +44,7 @@
 		crossorigin="anonymous" async></script>
 	</head>  
 
-	<body data-barba="wrapper">
+	<body>
 		{% include 'partials/header.nunjucks' %} 
 	    {% block content %}
 		{% endblock %}
