@@ -53,6 +53,20 @@ barba.init({
       // - Next is the next page that do something
       // - Trigger is when we clicked on, that makes transition happend
       
+      // Once enter directly current page run this method for page transition
+      once({current, next, trigger}) {
+        return new Promise((resolve) => {
+          const timeline = gsap.timeline({
+            onComplete() {
+              resolve()
+            }
+          })
+          
+          timeline 
+            .set(next.container, {opacity: 0 })
+            .to(next.container, {opacity: 1, delay:1 }) // set delay opacity 1 for smooth transition
+        })
+      },
       
       // when leave the page run this method for page transition
       leave({current, next, trigger}) {
@@ -96,7 +110,7 @@ barba.init({
             .set(next.container, { opacity: 0 }) // Set entered container to 0
             .to("header", { y: "0" }, 0)
             .to("footer", { y: "0" }, 0)
-            .to(next.container, { opacity: 1 }) // Show entered container after header + footer
+            .to(next.container, { opacity: 1, delay: 1 }) // Show entered container after header + footer
         })
       },
     }
